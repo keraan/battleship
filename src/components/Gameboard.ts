@@ -1,4 +1,4 @@
-import { shipType } from "../types/shipTypes";
+// import { shipType } from "../types/shipTypes";
 // import { SHIPS } from "../types/Ships";
 import { DIRECTION } from "../types/directions";
 import Ship from "./Ship";

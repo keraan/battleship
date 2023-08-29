@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import { useEffect } from "react";
 import Game from "./Game";
 
 type HudProps = {

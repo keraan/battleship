@@ -53,7 +53,7 @@ export default class Game {
     }
 
     public isValidAttack(row: number, col: number): boolean {
-        const currentPlayer = this.turn === 1 ? this.player1 : this.player2
+        //const currentPlayer = this.turn === 1 ? this.player1 : this.player2
         const opposingBoard = this.turn === 1 ? this.board2 : this.board1
 
         if (opposingBoard.getCell(row, col) < 0) return false
@@ -61,7 +61,7 @@ export default class Game {
     }
 
     public startTurn(row: number, col: number): boolean {
-        const currentPlayer = this.turn === 1 ? this.player1 : this.player2
+        //const currentPlayer = this.turn === 1 ? this.player1 : this.player2
         const opposingBoard = this.turn === 1 ? this.board2 : this.board1
 
          // now current player gets to pick a move

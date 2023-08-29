@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Gameboard from "./Gameboard";
+import { useState } from "react";
+// import Gameboard from "./Gameboard";
 import '../styles/board.css'
 import BoardRow from "./BoardRow";
 import Player from "./Player";
@@ -60,8 +60,6 @@ export default function Board({handleNextTurn, player, turn, isPlacementPhase, c
                     rowIndex={rowIndex} 
                     handleNextTurn={handleNextTurn} 
                     player={player}
-                    isPlacementPhase={isPlacementPhase}
-                    currentShip={currentShip}
                     highlightedCells={highlightedCells}
                     handleMouseEnter={handleMouseEnter}
                     handleMouseLeave={handleMouseLeave}

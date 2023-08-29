@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect } from "react";
 import Player from "./Player";
-import Ship from "./Ship";
+// import Ship from "./Ship";
 
 type BoardCellProps = {
     cell: number

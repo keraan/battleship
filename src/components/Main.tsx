@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from "react";
+import { useEffect, useState, useReducer } from "react";
 import '../styles/main.css'
 import Board from "./Board";
 import Hud from "./Hud";
@@ -7,13 +7,13 @@ import { DIRECTION } from "../types/directions";
 import { Bot } from "./Bot";
 
 import Game from "./Game";
-import Controls from "./Controls";
+// import Controls from "./Controls";
 import Ship from "./Ship";
 type ShipType = 'carrier' | 'battleship' | 'destroyer' | 'submarine' | 'patrolBoat';
 
 
 export default function Main() {
-    const [game, setGame] = useState<Game>(new Game())
+    const [game] = useState<Game>(new Game())
     const [remainingShips, setRemainingShips] = useState<ShipType[]>(['carrier', 'battleship', 'destroyer', 'submarine', 'patrolBoat']);
     const [currentShip, setCurrentShip] = useState<Ship | null>(new Ship(1, 5, 0, false))
     const [isPlacementPhase, setIsPlacementPhase] = useState(true)
