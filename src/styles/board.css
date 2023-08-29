@@ -1,0 +1,47 @@
+.board {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #282c34;;
+}
+
+.board-row {
+    display: flex;
+}
+
+.board-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(35vw / 7);
+    height: calc(35vw / 7);
+    border: 1px solid black;
+    transition: all 0.3s
+}
+
+.board-cell:hover {
+    background-color: rgb(236, 132, 132);
+}
+
+.hit {
+    background-color: rgb(250, 76, 76)
+}
+
+.miss {
+    background-color: rgb(10, 105, 74);
+}
+
+.active {
+    border: 2px solid green;
+}
+
+.board-cell.highlighted {
+    background-color: rgb(105, 105, 80); /* Or any other color */
+}
+
+.ship {
+    background-color: rgb(35, 28, 131);
+}
+
+.placement {
+    background-color: white;
+}
