@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import Gameboard from "./Gameboard";
 import '../styles/board.css'
 import BoardRow from "./BoardRow";
 import Player from "./Player";
@@ -19,7 +18,6 @@ export default function Board({handleNextTurn, player, turn, isPlacementPhase, c
     const [highlightedCells, setHighlightedCells] = useState(new Set());
     
     const board = player.getBoard().getBoardState()
-    //const board = gameBoard.getBoardState()
     let boardClass = "board"
     if (turn === player.getId()) boardClass = "board active"
 

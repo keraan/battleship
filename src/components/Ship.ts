@@ -41,7 +41,6 @@ export default class Ship {
     hit(): number {
         this.timesHit++
         this.calculateIsSunk()
-        // I might need to add something that checks if the ship sinks here? or this can be done externally
         return this.timesHit
     }
 }

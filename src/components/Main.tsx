@@ -7,7 +7,6 @@ import { DIRECTION } from "../types/directions";
 import { Bot } from "./Bot";
 
 import Game from "./Game";
-// import Controls from "./Controls";
 import Ship from "./Ship";
 type ShipType = 'carrier' | 'battleship' | 'destroyer' | 'submarine' | 'patrolBoat';
 
@@ -20,8 +19,7 @@ export default function Main() {
     const [currentDirection, setCurrentDirection] = useState(DIRECTION.DOWN)
 
     useState(() => {
-        
-
+        // Currently hardcoded enemy ships.
         const ss1 = new Ship(1, 5, 0, false)
         const ss2 = new Ship(2, 2, 0, false)
         const ss3 = new Ship(3, 3, 0, false)
@@ -128,8 +126,6 @@ export default function Main() {
                     currentDirection={currentDirection}
                 />
             </div>
-            {/* <Controls game={game} handleNextTurn={handleNextTurn}/> */}
-
         </main>
     )
 }

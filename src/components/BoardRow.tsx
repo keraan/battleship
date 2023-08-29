@@ -1,5 +1,3 @@
-// import React from "react";
-
 import BoardCell from "./Board-cell";
 import Player from "./Player";
 

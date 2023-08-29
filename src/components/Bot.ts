@@ -20,7 +20,7 @@ export class Bot extends Player {
         let col = 0;
         
         while (!this.game.isValidAttack(row, col)) {
-            await this.sleep((Math.random() * 2000) + 700); // Pause for 100 milliseconds
+            await this.sleep((Math.random() * 2000) + 700);
             row = Math.floor((Math.random() * 100) % 7);
             col = Math.floor((Math.random() * 100) % 7);
         }

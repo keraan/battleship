@@ -1,5 +1,3 @@
-// import { shipType } from "../types/shipTypes";
-// import { SHIPS } from "../types/Ships";
 import { DIRECTION } from "../types/directions";
 import Ship from "./Ship";
 
@@ -61,13 +59,11 @@ export default class Gameboard {
             return false
         }
 
-        // this.ships[ship.getId()] = new Ship(ship.getId(), ship.getLength(), 0, false)
         this.ships[ship.getId()] = ship
         let newRow = row
         let newCol = col
         for (let i = 0; i < ship.getLength(); i++) {
             this.board[newRow][newCol] = ship.getId()
-            // Check for existing ship; assuming 1 represents an occupied cell
             if (dir === DIRECTION.LEFT) {
                 newCol--;
             } else if (dir === DIRECTION.UP) {
