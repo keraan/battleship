@@ -23,11 +23,42 @@
 }
 
 .hit {
-    background-color: rgb(250, 76, 76)
+    position: relative;
 }
 
-.miss {
+.hit::before,
+.hit::after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background: red;  /* Or any color you prefer */
+}
+
+.hit::before {
+    transform: rotate(45deg);
+}
+
+.hit::after {
+    transform: rotate(-45deg);
+}
+
+/* .miss {
     background-color: rgb(10, 105, 74);
+} */
+.miss {
+    position: relative;
+    transition: all 1s
+}
+
+.miss::before,
+.miss::after {
+    content: "";
+    position:absolute;
+    width: 5px;
+    height: 5px;
+    background: red;
+    border-radius: 2px;
 }
 
 .active {

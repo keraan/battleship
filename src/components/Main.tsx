@@ -17,20 +17,39 @@ export default function Main() {
     const [currentShip, setCurrentShip] = useState<Ship | null>(new Ship(1, 5, 0, false))
     const [isPlacementPhase, setIsPlacementPhase] = useState(true)
     const [currentDirection, setCurrentDirection] = useState(DIRECTION.DOWN)
+    const [hudContent, setHudContent] = useState("")
+    const [botPlacedShips, setBotPlacedShips] = useState(false)
 
-    useState(() => {
-        // Currently hardcoded enemy ships.
-        const ss1 = new Ship(1, 5, 0, false)
-        const ss2 = new Ship(2, 2, 0, false)
-        const ss3 = new Ship(3, 3, 0, false)
-        const ss4 = new Ship(4, 1, 0, false)
-        const ss5 = new Ship(5, 1, 0, false)
-        game.getBoardTwo().placeShip(ss1, 0, 0, DIRECTION.RIGHT)
-        game.getBoardTwo().placeShip(ss2, 1, 0, DIRECTION.RIGHT)
-        game.getBoardTwo().placeShip(ss3, 2, 0, DIRECTION.RIGHT)
-        game.getBoardTwo().placeShip(ss4, 3, 0, DIRECTION.RIGHT)
-        game.getBoardTwo().placeShip(ss5, 4, 0, DIRECTION.RIGHT)
-    })
+    // useState(() => {
+    //     // Currently hardcoded enemy ships.
+    //     // const ss1 = new Ship(1, 5, 0, false)
+    //     // const ss2 = new Ship(2, 2, 0, false)
+    //     // const ss3 = new Ship(3, 3, 0, false)
+    //     // const ss4 = new Ship(4, 1, 0, false)
+    //     // const ss5 = new Ship(5, 1, 0, false)
+    //     // game.getBoardTwo().placeShip(ss1, 0, 0, DIRECTION.RIGHT)
+    //     // game.getBoardTwo().placeShip(ss2, 1, 0, DIRECTION.RIGHT)
+    //     // game.getBoardTwo().placeShip(ss3, 2, 0, DIRECTION.RIGHT)
+    //     // game.getBoardTwo().placeShip(ss4, 3, 0, DIRECTION.RIGHT)
+    //     // game.getBoardTwo().placeShip(ss5, 4, 0, DIRECTION.RIGHT)
+    //     const bot = game.getPlayerOne() as Bot;
+    //     bot.placeShipsRandomly()
+    // })
+
+    useEffect(() => {
+        if (!botPlacedShips) {
+            setBotPlacedShips(true)
+            const bot = game.getPlayerTwo() as Bot;
+            bot.placeShipsRandomly();
+        }
+        // console.log("Type of object returned by getPlayerOne:", typeof game.getPlayerOne());
+        // console.log("Object returned by getPlayerOne:", game.getPlayerOne());
+        // console.log("Is bot an instance of Bot class?", bot instanceof Bot);
+        // console.log("Does the method exist?", typeof bot.placeShipsRandomly === 'function');
+        // if (bot instanceof Bot && typeof bot.placeShipsRandomly === 'function') {
+        //     bot.placeShipsRandomly();
+        // }
+    }, []); 
 
     const [, forceUpdate] = useReducer(x => x + 1, 0);
     useEffect(() => {
@@ -60,33 +79,35 @@ export default function Main() {
     function handleNextTurn(row: number, col: number, playerId: number) {
         if (isPlacementPhase) {
             if (!currentShip) {
-                setIsPlacementPhase(false)
-                return
+                setIsPlacementPhase(false);
+                return;
             }
-            while (game.getBoardOne().placeShip(currentShip, row, col, currentDirection))
-            // Set logic for placing ship
+            
+            if (game.getBoardOne().placeShip(currentShip, row, col, currentDirection)) {
+                setRemainingShips(prevShips => prevShips.slice(1));
+                setHudContent("")
+            } else {
+                setHudContent("Invalid placement. Ensure ships are not overlapping!")
+            }
+            return;
+        }
 
-            setRemainingShips(prevShips => prevShips.slice(1))
+        if (game.gameOver()) {
             return
         }
         
-        if (game.getTurn() !== playerId) {
-            return
-        }
-        if (!game.gameOver()) {
+        if (game.getTurn() === playerId && !isPlacementPhase) {
             if (game.isValidAttack(row, col)) {
-                game.startTurn(row, col)
-                game.switchTurn()
+                game.startTurn(row, col);
+                game.switchTurn();
             }
-            forceUpdate(); // This will force a re-render
-        } else {
-            console.log("gameover?!")
         }
+        forceUpdate();
     }
 
 
 
-    const handleRightClick = (e: any) => {
+    function handleRightClick (e: any) {
         e.preventDefault();
         currentDirection === DIRECTION.RIGHT ? 
             setCurrentDirection(DIRECTION.DOWN) : 
@@ -105,9 +126,10 @@ export default function Main() {
     }, [currentDirection, setCurrentDirection]); 
 
 
+
     return (
         <main className="main">
-            <Hud game={game} isPlacementPhase={isPlacementPhase}/>
+            <Hud game={game} isPlacementPhase={isPlacementPhase} content={hudContent}/>
             <div className="boards">
                 <Board 
                     handleNextTurn={handleNextTurn} 
@@ -125,6 +147,14 @@ export default function Main() {
                     currentShip={currentShip}
                     currentDirection={currentDirection}
                 />
+            </div>
+            <div className="info-bar">
+                <div className="info">
+                    Your Board
+                </div>
+                <div className="info">
+                    Opponent's Board
+                </div>
             </div>
         </main>
     )

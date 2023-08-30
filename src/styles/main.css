@@ -15,3 +15,13 @@
     width: 80vw;
 }
 
+.info-bar {
+    display: flex;
+    justify-content: space-around;
+    width: 80vw;
+    margin-top: 0px;
+}
+
+.info {
+    width: 40vw;
+}

@@ -32,7 +32,7 @@ export default function BoardCell({cell, cellIndex, rowIndex, handleNextTurn, pl
         <div 
             className={boardCellClass} 
             key={cellIndex} 
-            onClick={() => handleNextTurn(rowIndex, cellIndex, player.getId())}
+            onClick={() => handleNextTurn(rowIndex, cellIndex, player.getId() === 1 ? 2 : 1)}
             onMouseLeave={onMouseLeave}
             onMouseMove={onMouseEnter}
         >

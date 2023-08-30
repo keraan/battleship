@@ -40,6 +40,8 @@ export default class Game {
     public isValidAttack(row: number, col: number): boolean {
         //const currentPlayer = this.turn === 1 ? this.player1 : this.player2
         const opposingBoard = this.turn === 1 ? this.board2 : this.board1
+        if (row < 0 || row > 6) return false;
+        if (col < 0 || col > 6) return false
 
         if (opposingBoard.getCell(row, col) < 0) return false
         return true
